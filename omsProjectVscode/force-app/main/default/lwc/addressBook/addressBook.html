@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Shipping Address" icon-name="standard:account">
+       <lightning-button label="Back"  slot="actions" onclick={navigateToHomePage} variant="brand" title="return"></lightning-button>  
+       <template if:true={addressDetails}>
+            <template for:each={addressDetails} for:item="add">
+                <div class="slds-m-around_medium" key={add.Id}>
+                    <lightning-input type="checkbox" label="Select Shipping Address"></lightning-input>
+                    <lightning-formatted-address street={add.Street__c} city={add.City__c} state={add.State__c}
+                        country={add.Country__c} postal-code={add.Postal_Code__c}>
+                    </lightning-formatted-address>
+                </div>
+            </template>
+        </template>
+        <template if:true={showNewAdd}>
+            <template if:true={addRecord}>
+                <div class="slds-var-m-around_medium">
+                    <div class="container-fluid">
+                        <div class="form-group">
+                            <lightning-input label="Enter Street" type="text" value={addRecord.Street__c} name="Street"
+                                onchange={handleChange}></lightning-input>
+                        </div>
+                        <div class="form-group">
+                            <lightning-input label="Enter City" type="text" value={addRecord.City__c} name="City"
+                                onchange={handleChange}></lightning-input>
+                        </div>
+                        <div class="form-group">
+                            <lightning-input label="Enter State" type="text" value={addRecord.State__c} name="State"
+                                onchange={handleChange}></lightning-input>
+                       <!----> </div>
+                        <div class="form-group">
+                            <lightning-input label="Enter Country" type="text" value={addRecord.Country__c}
+                                name="Country" onchange={handleChange}></lightning-input>
+                        </div>
+                        <div class="form-group">
+                            <lightning-input label="Enter Land Mark" type="text" value={addRecord.Land_Mark__c}
+                                name="LandMark" onchange={handleChange}></lightning-input>
+                        </div>
+                        <div class="form-group">
+                            <lightning-input label="Enter Postal Code" type="number" value={addRecord.Postal_Code__c}
+                                name="PostalCode" onchange={handleChange}></lightning-input>
+                        </div>
+                    </div>
+                    <lightning-button label="Submit" onclick={handleSave} variant="brand"></lightning-button>
+                </div>
+            </template>
+        </template>
+        <div class="slds-var-m-around_medium">
+            <template if:false={showNewAdd}>
+                <div class="slds-var-m-around_medium">
+                    <lightning-button label="Add New Address"  slot="actions" onclick={handleNewAddress}
+                        variant="success"></lightning-button>
+                
+
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
